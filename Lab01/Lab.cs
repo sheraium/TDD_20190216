@@ -4,7 +4,7 @@ namespace Lab01
     {
         public string Joey(string input)
         {
-            throw new System.NotImplementedException();
+            return "A";
         }
     }
 }
