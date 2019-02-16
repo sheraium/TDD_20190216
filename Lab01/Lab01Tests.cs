@@ -20,5 +20,12 @@ namespace Lab01
             var actual = _lab.Joey("ab");
             Assert.AreEqual("A-Bb", actual);
         }
+
+        [TestMethod]
+        public void Abc()
+        {
+            var actual = _lab.Joey("Abc");
+            Assert.AreEqual("A-Bb-Ccc", actual);
+        }
     }
 }
