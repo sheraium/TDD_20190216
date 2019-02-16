@@ -153,6 +153,21 @@ namespace AccountingTests
                 381);
         }
 
+        [TestMethod]
+        public void CrossYear()
+        {
+            PresetData(new List<Budget>()
+            {
+                new Budget(){YearMonth = "201812", Amount = 310},
+                new Budget(){YearMonth = "201901", Amount = 31},
+            });
+
+            TotalAmountShouldBe(
+                new DateTime(2018, 12, 31),
+                new DateTime(2019, 1, 2),
+                12);
+        }
+
         private void TotalAmountShouldBe(DateTime start, DateTime end, double expected)
         {
             var actual = _accounting.TotalAmount(
