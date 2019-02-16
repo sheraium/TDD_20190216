@@ -21,6 +21,20 @@ namespace AccountingTests
                 0);
         }
 
+        [TestMethod]
+        public void WholeMonth()
+        {
+            PresetData(new List<Budget>()
+            {
+                new Budget(){YearMonth = "201901", Amount = 31},
+            });
+
+            TotalAmountShouldBe(
+                new DateTime(2019, 1, 1),
+                new DateTime(2019, 1, 31),
+                31);
+        }
+
         private void TotalAmountShouldBe(DateTime start, DateTime end, double expected)
         {
             var actual = _accounting.TotalAmount(

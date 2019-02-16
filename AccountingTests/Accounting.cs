@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace AccountingTests
 {
@@ -13,7 +14,9 @@ namespace AccountingTests
 
         public double TotalAmount(DateTime start, DateTime end)
         {
-            return 0d;
+            var listOfBudgets = _budgetRepo.GetAll();
+            var yearMonth = start.ToString("yyyyMM");
+            return listOfBudgets.FirstOrDefault(b => b.YearMonth == yearMonth)?.Amount ?? 0;
         }
     }
 }
