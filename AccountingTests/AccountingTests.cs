@@ -8,17 +8,32 @@ namespace AccountingTests
     [TestClass]
     public class AccountingTests
     {
+        private Accounting _accounting;
+
         [TestMethod]
         public void NoData()
         {
-            var budgetRepo = Substitute.For<IBudgetRepo>();
-            budgetRepo.GetAll().Returns(new List<Budget>());
-            Accounting accounting = new Accounting(budgetRepo);
+            PresetData(new List<Budget>());
 
-            var actual = accounting.TotalAmount(
+            TotalAmountShouldBe(
                 new DateTime(2019, 1, 1),
-                new DateTime(2019, 1, 1));
-            Assert.AreEqual(0, actual);
+                new DateTime(2019, 1, 1),
+                0);
+        }
+
+        private void TotalAmountShouldBe(DateTime start, DateTime end, double expected)
+        {
+            var actual = _accounting.TotalAmount(
+                start,
+                end);
+            Assert.AreEqual(expected, actual);
+        }
+
+        private void PresetData(List<Budget> data)
+        {
+            var budgetRepo = Substitute.For<IBudgetRepo>();
+            budgetRepo.GetAll().Returns(data);
+            _accounting = new Accounting(budgetRepo);
         }
     }
 }
