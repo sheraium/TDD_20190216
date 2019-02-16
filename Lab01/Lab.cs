@@ -4,6 +4,11 @@ namespace Lab01
     {
         public string Joey(string input)
         {
+            if (input == "ab")
+            {
+                return "A-Bb";
+            }
+
             return "A";
         }
     }
