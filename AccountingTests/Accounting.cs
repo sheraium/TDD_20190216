@@ -16,6 +16,19 @@ namespace AccountingTests
         public double TotalAmount(DateTime start, DateTime end)
         {
             var listOfBudgets = _budgetRepo.GetAll();
+            var listOfDays = GetDaysOfYearMonthes(start, end);
+            return listOfDays.Sum(d => { return CalculateAmount(listOfBudgets, d); });
+        }
+
+        private static double CalculateAmount(IEnumerable<Budget> listOfBudgets, KeyValuePair<DateTime, int> d)
+        {
+            var amount = listOfBudgets.FirstOrDefault(b => b.YearMonth == d.Key.ToString("yyyyMM"))?.Amount ?? 0;
+            var rate = (double)d.Value / DateTime.DaysInMonth(d.Key.Year, d.Key.Month);
+            return amount * rate;
+        }
+
+        private static Dictionary<DateTime, int> GetDaysOfYearMonthes(DateTime start, DateTime end)
+        {
             var listOfDays = new Dictionary<DateTime, int>();
             while (start <= end)
             {
@@ -28,15 +41,11 @@ namespace AccountingTests
                 {
                     listOfDays.Add(yearMonth, 1);
                 }
+
                 start = start.AddDays(1);
             }
 
-            return listOfDays.Sum(d =>
-             {
-                 var amount = listOfBudgets.FirstOrDefault(b => b.YearMonth == d.Key.ToString("yyyyMM"))?.Amount ?? 0;
-                 var rate = (double)d.Value / DateTime.DaysInMonth(d.Key.Year, d.Key.Month);
-                 return amount * rate;
-             });
+            return listOfDays;
         }
     }
 }
