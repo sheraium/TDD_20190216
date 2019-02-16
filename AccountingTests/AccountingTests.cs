@@ -122,6 +122,21 @@ namespace AccountingTests
                 41);
         }
 
+        [TestMethod]
+        public void TwoMonthsWithLeapYear()
+        {
+            PresetData(new List<Budget>()
+            {
+                new Budget(){YearMonth = "202001", Amount = 31},
+                new Budget(){YearMonth = "202002", Amount = 290},
+            });
+
+            TotalAmountShouldBe(
+                new DateTime(2020, 1, 31),
+                new DateTime(2020, 2, 1),
+                11);
+        }
+
         private void TotalAmountShouldBe(DateTime start, DateTime end, double expected)
         {
             var actual = _accounting.TotalAmount(
