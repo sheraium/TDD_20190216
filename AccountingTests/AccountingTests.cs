@@ -137,6 +137,22 @@ namespace AccountingTests
                 11);
         }
 
+        [TestMethod]
+        public void ThreeMonths()
+        {
+            PresetData(new List<Budget>()
+            {
+                new Budget(){YearMonth = "201901", Amount = 31},
+                new Budget(){YearMonth = "201902", Amount = 280},
+                new Budget(){YearMonth = "201903", Amount = 3100},
+            });
+
+            TotalAmountShouldBe(
+                new DateTime(2019, 1, 31),
+                new DateTime(2019, 3, 1),
+                381);
+        }
+
         private void TotalAmountShouldBe(DateTime start, DateTime end, double expected)
         {
             var actual = _accounting.TotalAmount(
