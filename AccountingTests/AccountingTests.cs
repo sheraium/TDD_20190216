@@ -78,6 +78,20 @@ namespace AccountingTests
                 11);
         }
 
+        [TestMethod]
+        public void OneDay()
+        {
+            PresetData(new List<Budget>()
+            {
+                new Budget(){YearMonth = "201901", Amount = 31},
+            });
+
+            TotalAmountShouldBe(
+                new DateTime(2019, 1, 1),
+                new DateTime(2019, 1, 1),
+                1);
+        }
+
         private void TotalAmountShouldBe(DateTime start, DateTime end, double expected)
         {
             var actual = _accounting.TotalAmount(
