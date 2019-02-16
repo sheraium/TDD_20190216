@@ -13,7 +13,7 @@ namespace AccountingTests
 
         public double TotalAmount(DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return 0d;
         }
     }
 }
