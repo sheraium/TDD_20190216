@@ -98,6 +98,7 @@ namespace AccountingTests
             PresetData(new List<Budget>()
             {
                 new Budget(){YearMonth = "201901", Amount = 31},
+                new Budget(){YearMonth = "201903", Amount = 31},
             });
 
             TotalAmountShouldBe(
