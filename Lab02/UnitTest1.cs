@@ -6,12 +6,20 @@ namespace Lab02
     [TestClass]
     public class AccountTests
     {
+        private Accounting _accounting = new Accounting();
+
         [TestMethod]
         public void no_budgets()
         {
-            var accounting = new Accounting();
-            var totalAmount = accounting.TotalAmount(new DateTime(2019, 4, 1), new DateTime(2019, 4, 1));
-            Assert.AreEqual(0, totalAmount);
+            TotalAmountShouldBe(0,
+                new DateTime(2019, 4, 1),
+                 new DateTime(2019, 4, 1));
+        }
+
+        private void TotalAmountShouldBe(int expected, DateTime start, DateTime end)
+        {
+            var totalAmount = _accounting.TotalAmount(start, end);
+            Assert.AreEqual(expected, totalAmount);
         }
     }
 }
