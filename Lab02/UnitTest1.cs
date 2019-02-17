@@ -12,6 +12,7 @@ namespace Lab02
         [TestInitialize]
         public void TestInit()
         {
+            _fakeBudgetRepo = new FakeBudgetRepo();
             _accounting = new Accounting(_fakeBudgetRepo);
         }
 
@@ -26,7 +27,6 @@ namespace Lab02
         [TestMethod]
         public void peroid_inside_budget_month()
         {
-            _fakeBudgetRepo = new FakeBudgetRepo();
             _fakeBudgetRepo.SetBudgets(new Budget() { YearMonth = "201904", Amount = 30 });
             TotalAmountShouldBe(1,
                 new DateTime(2019, 4, 1),
