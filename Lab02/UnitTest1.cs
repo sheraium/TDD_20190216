@@ -4,23 +4,14 @@ using System;
 namespace Lab02
 {
     [TestClass]
-    public class UnitTest1
+    public class AccountTests
     {
-        private Accounting accounting = new Accounting();
-
         [TestMethod]
-        public void No_budget()
+        public void no_budgets()
         {
-            TotalAmountShouldBe(0,
-                new DateTime(2019, 4, 1),
-                new DateTime(2019, 4, 1));
-        }
-
-        private void TotalAmountShouldBe(int expected, DateTime start, DateTime end)
-        {
-            Assert.AreEqual(expected, accounting.TotalAmount(
-                start,
-                end));
+            var accounting = new Accounting();
+            var totalAmount = accounting.TotalAmount(new DateTime(2019, 4, 1), new DateTime(2019, 4, 1));
+            Assert.AreEqual(0, totalAmount);
         }
     }
 }

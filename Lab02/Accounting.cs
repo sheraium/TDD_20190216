@@ -6,7 +6,7 @@ namespace Lab02
     {
         public double TotalAmount(DateTime start, DateTime end)
         {
-            return 1;
+            throw new NotImplementedException();
         }
     }
 }
