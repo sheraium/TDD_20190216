@@ -16,9 +16,14 @@ namespace Lab02
         {
             if (_budgetRepo.GetAll().Any())
             {
-                return (end - start).TotalDays + 1;
+                return Days(start, end);
             }
             return 0;
+        }
+
+        private static double Days(DateTime start, DateTime end)
+        {
+            return (end - start).TotalDays + 1;
         }
     }
 }
